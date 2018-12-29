@@ -15,18 +15,11 @@ before_install:
   - npm config set strict-ssl false
   - nvm install 8.11.3
   - nvm use 8.11.3
-  - npm install -g --unsafe-perm homebridge
-  - git clone git://github.com/quick2wire/quick2wire-gpio-admin.git
-  - cd quick2wire-gpio-admin
-  - make
-  - sudo make install
+  - npm install -g --unsafe-perm homebridge rpio
   - sudo adduser $USER gpio
-  - cd ../
-  - sudo echo "0" > /sys/class/gpio/gpio15/value
-  - sudo echo "0" > /sys/class/gpio/gpio17/value
 
 before_script:
-  - "npm install -g homebridge-garage-door-wsensor"
+  - "npm install -g homebridge-garage-door-plugin"
   - "mkdir /home/travis/.homebridge"
   - "cp config.sample.json /home/travis/.homebridge/config.json"
 
