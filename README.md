@@ -9,7 +9,7 @@ This project is loosely based on:
 
 I created my own code because I found the above somewhat lacking. The other Homebridge module used a rpio library that was marked depreciated and "do not use" by the author (and it didn't work), and Jordan's Nelson's code didn't use Homebridge....while great, means I have basically dedicate the raspberry pi to the garage door or some way to make homebridge his code co-exist. I also thought about it, and it is would could be error prone to assume the garage door is actually open with only one sensor....it could be stuck. So, I wanted to add an open and a closed sensor. In this way, I would be able to check if the door was either open, closed, opening, closing or obstructed. Homekit allows for all these status. Obstructed would occur if there is too much time between the either sensor going off.
 
-GPIO Library
+# GPIO Library
 
 First, while it would be easy to write something that maps the I/O pins and read their status from the /sys file system, a GPIO library is a better idea. The selected library is node-gpio (https://github.com/jperkin/node-rpio). These lib is based on C code with a Javascript interface. Rather than use the /sys filesystem to control the Rasberry PI GPIO,  it uses /dev/gpio and friends...which makes it more reliable never mind fast. These library also allows for "mock" mode where the GPIO pins are simulated for testing - useful to work on code on another non-Raspberry computer.
 
@@ -20,11 +20,11 @@ The code uses three GPIO pins:
 - one for the closed sensor (bottom of the garage door frame)
 - one for connecting to the relay board (which connects to the garage door button)
 
-How to Save Money
+# How to Save Money
 
 Stop now. Go buy a new garage door opener. Seriously, Home Depot has them for around $300-400 with Homekit support. By the time you buy the raspberry PI, a case, wire, switches, and set everything up... it will be cheaper just to replace the old garage door opener...and it will have things like the garage door position built in. However, it will lack the customability of this project...and your Homebridge setup can also interface to other devices like Nest devices, Lights, etc..
 
-State of the Project
+# State of the Project
 
 As of December 29, it doesn't work. Still work in progress.
 
