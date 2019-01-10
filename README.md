@@ -1,5 +1,6 @@
 # Homebridge Pi Garage Door Opener with Open/Close Sensors
 
+[This document needs some work]
 
 This is a [homebridge](https://github.com/nfarina/homebridge) plugin to make a Raspberry Pi connected with a Relay Board into a Garage Door Opener, via the Home app on iOS using Homekit.  It uses two magnetic switches to determine the state of the garage door, open, moving, or closed. Tested with iOS 12.
 
@@ -20,19 +21,38 @@ The code uses three GPIO pins:
 - one for the closed sensor (bottom of the garage door frame)
 - one for connecting to the relay board (which connects to the garage door button)
 
+## Accessories
+
+Unlike the other Garage Door plugins, this one exposes a few accessories:
+- Garage Door
+- Open Contact Sensor (tells you if the garage door is open - no guessing!)
+- Close Contact Sensor (tells you if the garage door is closed)
+- Motion Sensor (tells you if the garage door is in motion !open and !closed)
+- Manaul Door Switch
+
+The Garage Door accessory will not operate the garage door if it is in motion. Further, if the garage door is open, and you ask it to close, and the open sensor is contacted again, it assumes the garage door is obstructed, and tells Homekit it is such.
+
+The Manual Switch accessory is does two things:
+- forces the garage door relay to operate
+- gets around Homekit's security whereby the Garage Door accessory cannot operate from an automation without confirmation.
+
+The second item  is useful. If you setup an automation that says when you get home, open the garage door, and turn on the lights, if you use the Manual Switch, the garage door will operate without you having to unlock your phone to force it to go. This may be a security issue, but more device manuafacturers offer this type of thing through their app to get around the problem (ie. August Lock)...and I didn't feel like writing an app. This works around the issue.
+
 ## How to Save Money
 
 Stop now. Go buy a new garage door opener. Seriously, Home Depot has them for around $300-400 with Homekit support. By the time you buy the raspberry PI, a case, wire, switches, and set everything up... it will be cheaper just to replace the old garage door opener...and it will have things like the garage door position built in. However, it will lack the customability of this project...and your Homebridge setup can also interface to other devices like Nest devices, Lights, etc..
 
-## State of the Project
+### How to Setup
 
-As of December 29, it doesn't work. Still work in progress.
+Please do not run homebridge as root.
+
+```
+sudo npm install -g --unsafe-perm homebridge
+sudo npm install -g homebridge-garage-door-plugin
+homebridge
+```
 
 ### Sample Config
-
-Config to be placed in .homebridge/config.json
-* If you run homebridge from sudo, place config in /root/.homebridge/config.json
-* If you run homebridge without sudo, place config in /home/pi/.homebridge/config.json
 
 ```json
 {
@@ -46,25 +66,20 @@ Config to be placed in .homebridge/config.json
       "serialNumber": "0.4.20"
   },
   "description": "The garage home bridge",
-  "accessories": [{
-    "accessory": "Garage Door Opener",
-    "name": "Garage Door",
-    "doorRelayPin": 11,
-    "doorSensorPin": 10
-  }]
-}
+    "accessories": [
+        {
+            "accessory": "Garage Door Opener",
+            "name": "Garage Door",
+            "open_pin": 15,
+            "close_pin": 12,
+            "relay_pin": 13,
+            "openclose_timeout": 400,
+            "heartbeat_interval": 500,
+            "mock_model": "raspi-3",
+            "mock": false
+         }
+    ],}
 ```
 
-### How to Setup
+[ Add some explanation of the options here ]
 
-```
-sudo apt-get install libavahi-compat-libdnssd-dev
-git clone git://github.com/quick2wire/quick2wire-gpio-admin.git
-cd quick2wire-gpio-admin
-make
-sudo make install
-sudo adduser $USER gpio
-sudo npm install -g --unsafe-perm homebridge
-sudo npm install -g homebridge-garage-door-wsensor
-sudo homebridge
-```
