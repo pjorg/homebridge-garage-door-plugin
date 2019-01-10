@@ -1,4 +1,4 @@
-var garagedoorclass = require('./garagedoor');
+var garagedoorclass = require('./lib/garagedoorcontroller');
 
 var options = {
     open_pin: 12,
@@ -7,12 +7,30 @@ var options = {
     openclose_timeout: 400
 };
 
-var garagedoor = new garagedoorclass.GarageDoor(console.log, options);
+var garagedoorcontroller = new garagedoorclass.GarageDoorController(console.log, options);
 
-garagedoor.openGarageDoor();
+garagedoorcontroller.openGarageDoor();
+
+if (garagedoorcontroller.checkCloseSensor())
+{
+    console.log("Close sensor contacted");
+}
+else
+{
+    console.log("Close sensor NOT contacted");
+}
+
+if (garagedoorcontroller.checkOpenSensor())
+{
+    console.log("Open sensor contacted");
+}
+else
+{
+    console.log("Open sensor NOT contacted");
+}
 
 function checkStatus()
 {
-    garagedoor.checkDoorStatus();
+    garagedoorcontroller.checkDoorStatus();
 }
 setInterval(checkStatus, 250);

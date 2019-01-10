@@ -20,7 +20,13 @@
   },
   "homepage": "https://github.com/mbuckaway/homebridge-garage-door-plugin#readme",
   "dependencies": {
+    "homebridge": "^0.4.45",
+    "homebridge-lib": "^4.0.0",
     "rpio": "^1.0.11"
+  },
+  "engines": {
+    "homebridge": ">=0.4.33",
+    "node": ">=6.12.2"
   },
   "test": "nodejs test.js"
 }
