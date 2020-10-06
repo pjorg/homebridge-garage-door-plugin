@@ -1,0 +1,47 @@
+{
+  "pluginAlias": "Homebridge-RPi-Garage-Door-Opener",
+  "pluginType": "accessory",
+  "headerDisplay": "Controls a garage door with a RPi",
+  "footerDisplay": "For help please see the [README](https://github.com/mbuckaway/homebridge-garage-door-plugin/blob/master/README.md).",
+  "schema": {
+    "type": "object",
+    "properties": {
+        "open_pin": {
+            "title": "Open Sensor Pin",
+            "type": "integer",
+            "default": 15,
+            "minimum": 1,
+            "maximum": 40,
+            "required": true
+        },
+        "close_pin": {
+            "title": "Close Sensor Pin",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 40,
+            "default": 12
+        },
+        "relay_pin": {
+            "title": "Relay Sensor Pin",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 40,
+            "default": 12
+        },
+        "openclose_timeout": {
+            "title": "Open/Close Timeout",
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 3000,
+            "default": 400
+            },
+        "heartbeat_interval": {
+            "title": "Heartbeat interval",
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 3000,
+            "default": 500
+            }
+        }
+    }
+}

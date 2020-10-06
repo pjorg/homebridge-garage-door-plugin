@@ -12,7 +12,12 @@
   "accessories": [{
     "accessory": "Garage Door Opener",
     "name": "Garage Door",
-    "doorRelayPin": 11,
-    "doorSensorPin": 10
-  }]
+    "open_pin": 15,
+    "close_pin": 12,
+    "relay_pin": 13,
+    "openclose_timeout": 400,
+    "heartbeat_interval": 500,
+    "mock_model": "raspi-3",
+    "mock": false
+}]
 }
