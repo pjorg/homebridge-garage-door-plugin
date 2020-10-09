@@ -28,7 +28,8 @@ Unlike the other Garage Door plugins, this one exposes a few accessories:
 - Open Contact Sensor (tells you if the garage door is open - no guessing!)
 - Close Contact Sensor (tells you if the garage door is closed)
 - Motion Sensor (tells you if the garage door is in motion !open and !closed)
-- Manaul Door Switch
+- Manual Door Switch
+- Close Door Switch
 
 The Garage Door accessory will not operate the garage door if it is in motion. Further, if the garage door is open, and you ask it to close, and the open sensor is contacted again, it assumes the garage door is obstructed, and tells Homekit it is such.
 
@@ -36,7 +37,10 @@ The Manual Switch accessory is does two things:
 - forces the garage door relay to operate
 - gets around Homekit's security whereby the Garage Door accessory cannot operate from an automation without confirmation.
 
-The second item  is useful. If you setup an automation that says when you get home, open the garage door, and turn on the lights, if you use the Manual Switch, the garage door will operate without you having to unlock your phone to force it to go. This may be a security issue, but more device manuafacturers offer this type of thing through their app to get around the problem (ie. August Lock)...and I didn't feel like writing an app. This works around the issue.
+The second item is useful. If you setup an automation that says when you get home, open the garage door, and turn on the lights, if you use the Manual Switch, the garage door will operate without you having to unlock your phone to force it to go. This may be a security issue, but more device manuafacturers offer this type of thing through their app to get around the problem (ie. August Lock)...and I didn't feel like writing an app. This works around the issue.
+
+The Close Switch accessory is does two things will only operate the relay IF the close sensor is not contacted (the garage door isn't fully closed). This is created to allow automations to fire the relay only if the garage door is NOT closed (open) since I found the HomeKit sometimes ignores the open/close state to close the door. This makes sure that automations close the door only when they are supposed to.
+
 
 ## How to Save Money
 
@@ -44,7 +48,7 @@ Stop now. Go buy a new garage door opener. Seriously, Home Depot has them for ar
 
 ### How to Setup
 
-Please do not run homebridge as root.
+Install the plugin like any other. Use the Homebridge UI to configure the PINs for the close and open switches, and the relay pin. The timeouts can be left alone. If your door does not work on the relay, change the openclose timeout. This sets the amount of time the relay stays closed.
 
 ```
 sudo npm install -g --unsafe-perm homebridge
@@ -53,6 +57,8 @@ homebridge
 ```
 
 ### Sample Config
+
+Use the Homebridge UI to configure the plugin. The sample config is for reference only.
 
 ```json
 {
@@ -82,4 +88,3 @@ homebridge
 ```
 
 [ Add some explanation of the options here ]
-

@@ -50,6 +50,8 @@ class GarageDoorOpener {
     this.garagedoorservice = new Service.GarageDoorOpener(this.name, 'Auto');
     this.garagedoorswitchname = this.name + ' Manual';
     this.garagedoorswitchservice = new Service.Switch(this.garagedoorswitchname, 'Manual')
+    this.garagedoorclosername = this.name + ' Closer';
+    this.garagedoorcloserservice = new Service.Switch(this.garagedoorclosername, 'Closer')
     this.setupGarageDoorOpenerService();
 
     this.opensensorname = 'Garage Open Sensor';
@@ -85,12 +87,13 @@ class GarageDoorOpener {
   }
 
   getServices () {
-		return [this.informationService, this.garagedoorservice, this.garagedoorswitchservice, this.opensensor, this.closesensor, this.motionsensor];
+		return [this.informationService, this.garagedoorservice, this.garagedoorswitchservice, this.garagedoorcloserservice, this.opensensor, this.closesensor, this.motionsensor];
 	}
 
   setupGarageDoorOpenerService() {
 
     this.garagedoorswitchservice.setCharacteristic(Characteristic.On, false);
+    this.garagedoorcloserservice.setCharacteristic(Characteristic.On, false);
     this.garagedoorservice.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
     this.garagedoorservice.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
     this.garagedoorservice.setCharacteristic(Characteristic.ObstructionDetected, false);
@@ -111,6 +114,30 @@ class GarageDoorOpener {
         {
           this.log("Operating Garage door relay");
           this.garagedoorcontroller.forceOpenGarageDoor();
+        }
+        callback(null, false);
+      });
+
+      this.garagedoorcloserservice.getCharacteristic(Characteristic.On)
+      .on('get', (callback) => {
+        this.log("Current closer switch state get requested");
+        var value = false;
+        if (this.garagedoorcontroller.checkOpenSensor() == Characteristic.ContactSensorState.CONTACT_DETECTED)
+        {
+          value = true;
+        }
+        callback(null, value);
+      })
+      .on('set', (value, callback) => {
+        this.log("Target state set requested: " + value);
+        if (this.garagedoorcontroller.checkCloseSensor() == Characteristic.ContactSensorState.CONTACT_NOT_DETECTED)
+        {
+          this.log("Door not fully closed. Operating Garage door relay");
+          this.garagedoorcontroller.forceOpenGarageDoor();
+        }
+        else
+        {
+          this.log("Door closed. Ignoring request");
         }
         callback(null, false);
       });

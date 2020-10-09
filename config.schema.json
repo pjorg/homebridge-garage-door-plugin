@@ -10,37 +10,35 @@
             "title": "Open Sensor Pin",
             "type": "integer",
             "default": 15,
-            "minimum": 1,
-            "maximum": 40,
             "required": true
         },
         "close_pin": {
             "title": "Close Sensor Pin",
             "type": "integer",
-            "minimum": 1,
-            "maximum": 40,
-            "default": 12
+            "default": 12,
+            "required": true
         },
         "relay_pin": {
             "title": "Relay Sensor Pin",
             "type": "integer",
-            "minimum": 1,
-            "maximum": 40,
-            "default": 12
+            "default": 12,
+            "required": true
         },
         "openclose_timeout": {
             "title": "Open/Close Timeout",
             "type": "integer",
             "minimum": 100,
             "maximum": 3000,
-            "default": 400
+            "default": 400,
+            "required": true
             },
         "heartbeat_interval": {
             "title": "Heartbeat interval",
             "type": "integer",
             "minimum": 100,
             "maximum": 3000,
-            "default": 500
+            "default": 500,
+            "required": true
             }
         }
     }
