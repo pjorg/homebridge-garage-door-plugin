@@ -2,6 +2,8 @@
 
 [This document needs some work]
 
+This repo is no longer in use, and the garage door controller has been replaced by an ESP32 (code available) because the whole idea of running a linux OS on a RPi just seemed kinda silly. However, the code was working with Homebridge for more than a year. Your mileage may vary.
+
 This is a [homebridge](https://github.com/nfarina/homebridge) plugin to make a Raspberry Pi connected with a Relay Board into a Garage Door Opener, via the Home app on iOS using Homekit.  It uses two magnetic switches to determine the state of the garage door, open, moving, or closed. Tested with iOS 12.
 
 This project is loosely based on:
