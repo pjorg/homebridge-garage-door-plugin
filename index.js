@@ -8,7 +8,7 @@ const ON = false;
 module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory('pjorg-garage-door-opener', 'Garage Door Opener', GarageDoorOpener);
+  homebridge.registerAccessory('homebridge-garage-door-plugin', 'Garage Door Opener', GarageDoorOpener);
 };
 
 class GarageDoorOpener {
@@ -41,7 +41,7 @@ class GarageDoorOpener {
       this.log.warn('config.json: %s', message)
     });
     optionParser.parse(configJson);
-
+    
     // Dump configuration
     this.log("Configuration: " + JSON.stringify(this.config));
     this.name = this.config.name;
@@ -247,7 +247,7 @@ class GarageDoorOpener {
     if (status)
     {
       self.log('Heartbeat detected: ' + self.name + ' is ' + status.Status);
-      self.garagedoorservice.setCharacteristic(Characteristic.CurrentDoorState, status.Current);
+      self.garagedoorservice.setCharacteristic(Characteristic.CurrentDoorState, status.Current);          
       self.garagedoorservice.setCharacteristic(Characteristic.ObstructionDetected, self.garagedoorcontroller.ObstructionDetected);
       self.opensensor.setCharacteristic(Characteristic.ContactSensorState, status.OpenState);
       self.closesensor.setCharacteristic(Characteristic.ContactSensorState, status.CloseState);

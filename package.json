@@ -1,5 +1,5 @@
 {
-  "name": "pjorg-garage-door-opener",
+  "name": "homebridge-garage-door-plugin",
   "version": "1.1.0",
   "description": "Homebridge Garage Door opener controller with open and close sensors",
   "main": "index.js",
@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pjorg/homebridge-garage-door-plugin.git"
+    "url": "git+https://github.com/mbuckaway/homebridge-garage-door-plugin.git"
   },
   "keywords": [
     "homebridge-plugin"
   ],
-  "author": "Peter D. Jorgensen <pdjorgensen@gmail.com>",
+  "author": "Mark Buckaway <mark@buckaway.ca>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pjorg/homebridge-garage-door-plugin/issues"
+    "url": "https://github.com/mbuckaway/homebridge-garage-door-plugin/issues"
   },
-  "homepage": "https://github.com/pjorg/homebridge-garage-door-plugin#readme",
+  "homepage": "https://github.com/mbuckaway/homebridge-garage-door-plugin#readme",
   "dependencies": {
     "rpio": "^2.2.0"
   },
