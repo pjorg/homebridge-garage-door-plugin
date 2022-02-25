@@ -1,8 +1,8 @@
 {
-  "pluginAlias": "Homebridge-RPi-Garage-Door-Opener",
+  "pluginAlias": "pjorg-garage-door-opener",
   "pluginType": "accessory",
   "headerDisplay": "Controls a garage door with a RPi",
-  "footerDisplay": "For help please see the [README](https://github.com/mbuckaway/homebridge-garage-door-plugin/blob/master/README.md).",
+  "footerDisplay": "For help please see the [README](https://github.com/pjorg/homebridge-garage-door-plugin/blob/master/README.md).",
   "schema": {
     "type": "object",
     "properties": {

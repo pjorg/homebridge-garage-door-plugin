@@ -1,5 +1,8 @@
 # Homebridge Pi Garage Door Opener with Open/Close Sensors
 
+* Note: forked from mbuckaway with thanks!
+
+
 [This document needs some work]
 
 This repo is no longer in use, and the garage door controller has been replaced by an ESP32 (code available) because the whole idea of running a linux OS on a RPi just seemed kinda silly. However, the code was working with Homebridge for more than a year. Your mileage may vary.
