@@ -160,7 +160,7 @@ class GarageDoorOpener {
       this.garagedoorservice.getCharacteristic(Characteristic.ObstructionDetected)
       .on('get', (callback) => {
         this.log("Obstruction state get requested");
-        var obstruction = this.garagedoorcontroller.Obstruction();
+        var obstruction = this.garagedoorcontroller.Obstruction;
         callback(null, obstruction);
       });
 
