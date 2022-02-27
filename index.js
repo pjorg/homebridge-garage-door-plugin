@@ -91,7 +91,7 @@ class GarageDoorOpener {
         this.log("Current state get requested");
         var status = this.GarageDoorController.checkDoorStatus();
         if (status) {
-          this.log("Current state sent: " + status.Status);
+          this.log("Current state sent: " + status.state.Status);
           callback(null, status.HomeKitState);
         } else {
           this.log('A request for current door state was received, but we did not get anything from the controller class')
@@ -103,7 +103,7 @@ class GarageDoorOpener {
     this.GarageDoorService.getCharacteristic(Characteristic.ObstructionDetected)
       .on('get', (callback) => {
         this.log("Obstruction state get requested");
-        var obstruction = this.GarageController.Obstruction;
+        var obstruction = this.GarageDoorController.Obstruction;
         callback(null, obstruction);
       });
 
