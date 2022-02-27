@@ -90,9 +90,9 @@ class GarageDoorOpener {
       .on('get', (callback) => {
         this.log("Current state get requested");
         var status = this.GarageDoorController.checkDoorStatus();
-        if (status) {
+        if (typeof status != 'undefined') {
           this.log("Current state sent: " + status.state.Status);
-          callback(null, status.state.HomeKitState);
+          callback(status.state.HomeKitState);
         } else {
           this.log('A request for current door state was received, but we did not get anything from the controller class')
           callback(null);
@@ -104,19 +104,19 @@ class GarageDoorOpener {
       .on('get', (callback) => {
         this.log("Obstruction state get requested");
         var obstruction = this.GarageDoorController.Obstruction;
-        callback(null, obstruction);
+        callback(obstruction);
       });
 
     // Here's what to do when a request to get target door state arrives
     this.GarageDoorService.getCharacteristic(Characteristic.TargetDoorState)
       .on('get', (callback) => {
         this.log("Target state get requested");
-        callback(null, this.targetDoorState);
+        callback(this.targetDoorState);
       })
       .on('set', (value, callback) => {
         this.log("Target state set requested: " + value);
 
-        this.GarageDoorController.operateGarageDoor(value);
+        this.GarageDoorController.operateGarageDoor();
 
         var status = this.GarageDoorController.checkDoorStatus();
         this.log('Target Status Update: ' + status.state.Status);
@@ -126,7 +126,7 @@ class GarageDoorOpener {
 
     this.GarageDoorService.getCharacteristic(Characteristic.Name)
       .on('get', callback => {
-        callback(null, this.name);
+        callback(this.name);
       });
   }
 
