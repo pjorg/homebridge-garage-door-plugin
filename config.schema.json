@@ -1,8 +1,8 @@
 {
-  "pluginAlias": "Homebridge-RPi-Garage-Door-Opener",
+  "pluginAlias": "garage-door-opener",
   "pluginType": "accessory",
   "headerDisplay": "Controls a garage door with a RPi",
-  "footerDisplay": "For help please see the [README](https://github.com/mbuckaway/homebridge-garage-door-plugin/blob/master/README.md).",
+  "footerDisplay": "For help please see the [README](https://github.com/pjorg/homebridge-garage-door-plugin/blob/master/README.md).",
   "schema": {
     "type": "object",
     "properties": {
@@ -22,6 +22,18 @@
             "title": "Relay Sensor Pin",
             "type": "integer",
             "default": 12,
+            "required": true
+        },
+        "motor_motion_open_pin": {
+            "title": "Motor Motion to Open Sensor Pin",
+            "type": "integer",
+            "default": 29,
+            "required": true
+        },
+        "motor_motion_close_pin": {
+            "title": "Motor Motion to Close Sensor Pin",
+            "type": "integer",
+            "default": 16,
             "required": true
         },
         "openclose_timeout": {
