@@ -133,7 +133,7 @@ class GarageDoorOpener {
   heartbeat(self) {
     const status = self.GarageDoorController.checkDoorStatus();
     if (status) {
-      self.log('Heartbeat detected: ' + self.name + ' is ' + status.Status);
+      self.log('Heartbeat detected: ' + status.Status);
       self.GarageDoorService.setCharacteristic(Characteristic.CurrentDoorState, status.HomeKitState);
       self.GarageDoorService.setCharacteristic(Characteristic.ObstructionDetected, self.GarageDoorController.Obstruction);
     }
