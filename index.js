@@ -50,6 +50,7 @@ class GarageDoorOpener {
     this.GarageDoorController = new garagedoorclass.GarageDoorController(log, this.config);
 
     this.GarageDoorService = new Service.GarageDoorOpener(this.name, 'Auto');
+    setupGarageDoorOpenerService();
 
     this.InformationService = new Service.AccessoryInformation();
 
