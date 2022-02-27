@@ -93,6 +93,7 @@ class GarageDoorOpener {
         if (typeof status != 'undefined') {
           this.log("Current state sent: " + status.state.Status);
           callback(status.state.HomeKitState);
+          this.log('End of get CurrentDoorState characteristic: ' + JSON.stringify(status));
         } else {
           this.log('A request for current door state was received, but we did not get anything from the controller class')
           callback(null);
@@ -104,6 +105,7 @@ class GarageDoorOpener {
       .on('get', (callback) => {
         this.log("Obstruction state get requested");
         var obstruction = this.GarageDoorController.Obstruction;
+        this.log('End of get ObstructionDetected characteristic: ' + JSON.stringify(this.GarageDoorController.Obstruction));
         callback(obstruction);
       });
 
@@ -111,6 +113,7 @@ class GarageDoorOpener {
     this.GarageDoorService.getCharacteristic(Characteristic.TargetDoorState)
       .on('get', (callback) => {
         this.log("Target state get requested");
+        this.log('End of get Target Door State characteristic: ' + JSON.stringify(this.targetDoorState));
         callback(this.targetDoorState);
       })
       .on('set', (value, callback) => {
@@ -121,11 +124,13 @@ class GarageDoorOpener {
         var status = this.GarageDoorController.checkDoorStatus();
         this.log('Target Status Update: ' + status.state.Status);
         this.targetDoorState = value;
+        this.log('End of set Target Door State characteristic: ' + JSON.stringify(status));
         callback(null);
       });
 
     this.GarageDoorService.getCharacteristic(Characteristic.Name)
       .on('get', callback => {
+        this.log('End of get Name characteristic: ' + JSON.stringify(this.name));
         callback(this.name);
       });
   }
