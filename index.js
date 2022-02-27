@@ -120,6 +120,7 @@ class GarageDoorOpener {
 
         var status = this.GarageDoorController.checkDoorStatus();
         this.log('Target Status Update: ' + status.state.Status);
+        this.targetDoorState = value;
         callback(null, value);
       });
 
