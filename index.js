@@ -118,10 +118,8 @@ class GarageDoorOpener {
 
         this.GarageDoorController.operateGarageDoor(value);
 
-        var status = this.garagedoorcontroller.checkDoorStatus();
-        if (status) {
-          this.log('Target Status Update: ' + this.name + ' is ' + status.Status);
-        }
+        var status = this.GarageDoorController.checkDoorStatus();
+        this.log('Target Status Update: ' + status.state.Status);
         callback(null, value);
       });
 
@@ -133,9 +131,9 @@ class GarageDoorOpener {
 
   heartbeat(self) {
     const status = self.GarageDoorController.checkDoorStatus();
-    if (status) {
-      self.log('Heartbeat detected: ' + status.Status);
-      self.GarageDoorService.setCharacteristic(Characteristic.CurrentDoorState, status.HomeKitState);
+    if (status.isChanged) {
+      self.log('Heartbeat detected: ' + status.state.Status);
+      self.GarageDoorService.setCharacteristic(Characteristic.CurrentDoorState, status.state.HomeKitState);
       self.GarageDoorService.setCharacteristic(Characteristic.ObstructionDetected, self.GarageDoorController.Obstruction);
     }
   }
